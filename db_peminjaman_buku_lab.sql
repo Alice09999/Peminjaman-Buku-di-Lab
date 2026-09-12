@@ -2,9 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Database: `db_peminjaman_buku_lab`
--- MariaDB / MySQL
---
+-- Host: 127.0.0.1
+-- Generation Time: Jun 23, 2026 at 07:06 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -16,21 +17,15 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Database: `db_peminjaman_buku_lab`
+--
 
--- ========================================================
--- DATABASE
--- ========================================================
+-- --------------------------------------------------------
 
-CREATE DATABASE IF NOT EXISTS `db_peminjaman_buku_lab`
-  DEFAULT CHARACTER SET latin1
-  COLLATE latin1_swedish_ci;
-
-USE `db_peminjaman_buku_lab`;
-
-
--- ========================================================
--- TABLE: buku
--- ========================================================
+--
+-- Table structure for table `buku`
+--
 
 CREATE TABLE `buku` (
   `id_buku` int(11) NOT NULL,
@@ -44,20 +39,38 @@ CREATE TABLE `buku` (
   `cover` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Dumping data for table `buku`
+--
 
--- ========================================================
--- DATA: buku
--- ========================================================
-
-INSERT INTO `buku`
-(`id_buku`, `kode_buku`, `judul`, `penulis`, `penerbit`, `tahun_terbit`, `stok`, `created_at`, `cover`)
-VALUES
+INSERT INTO `buku` (`id_buku`, `kode_buku`, `judul`, `penulis`, `penerbit`, `tahun_terbit`, `stok`, `created_at`, `cover`) VALUES
 (8, 'BK006', 'Born to Stand Out', 'R.D Asti', NULL, NULL, 4, '2026-06-20 16:13:49', '1781972029_Born to Stand Out.jpg');
 
+-- --------------------------------------------------------
 
--- ========================================================
--- TABLE: mahasiswa
--- ========================================================
+--
+-- Table structure for table `detail_peminjaman`
+--
+
+CREATE TABLE `detail_peminjaman` (
+  `id_detail` int(11) NOT NULL,
+  `id_pinjam` int(11) NOT NULL,
+  `id_buku` int(11) NOT NULL,
+  `jumlah` int(11) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `detail_peminjaman`
+--
+
+INSERT INTO `detail_peminjaman` (`id_detail`, `id_pinjam`, `id_buku`, `jumlah`) VALUES
+(6, 6, 8, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mahasiswa`
+--
 
 CREATE TABLE `mahasiswa` (
   `npm` varchar(15) NOT NULL,
@@ -67,25 +80,23 @@ CREATE TABLE `mahasiswa` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Dumping data for table `mahasiswa`
+--
 
--- ========================================================
--- DATA: mahasiswa
--- ========================================================
+INSERT INTO `mahasiswa` (`npm`, `nama`, `kelas`, `prodi`, `created_at`) VALUES
+('24781101', 'Alex', 'MI4D', 'Manajemen Informatika', '2026-06-18 06:45:46'),
+('24781102', 'Alya', 'MI4D', 'Manajemen Informatika', '2026-06-18 06:45:22'),
+('24781117', 'Silvia Nanda Agustin', 'MI4D', 'Manajemen Informatika', '2026-06-18 06:28:14'),
+('24781118', 'Yayuk', 'MI4D', 'Manajemen Informatika', '2026-06-18 06:44:58'),
+('24781119', 'Sehun', 'MI4D', 'Manajemen Informatika', '2026-06-18 06:46:07'),
+('24781120', 'LISA', 'MI4A', 'Manajemen Informatika', '2026-06-22 13:29:25');
 
-INSERT INTO `mahasiswa`
-(`npm`, `nama`, `kelas`, `prodi`, `created_at`)
-VALUES
-('24000001', 'Mahasiswa 1', 'MI4D', 'Manajemen Informatika', '2026-06-18 06:45:46'),
-('24000002', 'Mahasiswa 2', 'MI4D', 'Manajemen Informatika', '2026-06-18 06:45:22'),
-('24000003', 'Mahasiswa 3', 'MI4D', 'Manajemen Informatika', '2026-06-18 06:28:14'),
-('24000004', 'Mahasiswa 4', 'MI4D', 'Manajemen Informatika', '2026-06-18 06:44:58'),
-('24000005', 'Mahasiswa 5', 'MI4D', 'Manajemen Informatika', '2026-06-18 06:46:07'),
-('24000006', 'Mahasiswa 6', 'MI4A', 'Manajemen Informatika', '2026-06-22 13:29:25');
+-- --------------------------------------------------------
 
-
--- ========================================================
--- TABLE: peminjaman
--- ========================================================
+--
+-- Table structure for table `peminjaman`
+--
 
 CREATE TABLE `peminjaman` (
   `id_pinjam` int(11) NOT NULL,
@@ -95,48 +106,24 @@ CREATE TABLE `peminjaman` (
   `status` enum('Dipinjam','Dikembalikan') DEFAULT 'Dipinjam'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Dumping data for table `peminjaman`
+--
 
--- ========================================================
--- DATA: peminjaman
--- ========================================================
+INSERT INTO `peminjaman` (`id_pinjam`, `npm`, `tanggal_pinjam`, `tanggal_jatuh_tempo`, `status`) VALUES
+(1, '24781117', '2026-06-18', '2026-06-25', 'Dikembalikan'),
+(2, '24781117', '2026-06-18', '2026-06-25', 'Dikembalikan'),
+(3, '24781101', '2026-06-18', '2026-06-25', 'Dikembalikan'),
+(4, '24781119', '2026-06-18', '2026-06-25', 'Dikembalikan'),
+(5, '24781118', '2026-06-18', '2026-06-25', 'Dikembalikan'),
+(6, '24781117', '2026-06-20', '2026-06-27', 'Dikembalikan'),
+(7, '24781120', '2026-06-22', '2026-06-29', 'Dipinjam');
 
-INSERT INTO `peminjaman`
-(`id_pinjam`, `npm`, `tanggal_pinjam`, `tanggal_jatuh_tempo`, `status`)
-VALUES
-(1, '24000001', '2026-06-18', '2026-06-25', 'Dikembalikan'),
-(2, '24000001', '2026-06-18', '2026-06-25', 'Dikembalikan'),
-(3, '24000002', '2026-06-18', '2026-06-25', 'Dikembalikan'),
-(4, '24000003', '2026-06-18', '2026-06-25', 'Dikembalikan'),
-(5, '24000004', '2026-06-18', '2026-06-25', 'Dikembalikan'),
-(6, '24000001', '2026-06-20', '2026-06-27', 'Dikembalikan'),
-(7, '24000005', '2026-06-22', '2026-06-29', 'Dipinjam');
+-- --------------------------------------------------------
 
-
--- ========================================================
--- TABLE: detail_peminjaman
--- ========================================================
-
-CREATE TABLE `detail_peminjaman` (
-  `id_detail` int(11) NOT NULL,
-  `id_pinjam` int(11) NOT NULL,
-  `id_buku` int(11) NOT NULL,
-  `jumlah` int(11) DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
-
--- ========================================================
--- DATA: detail_peminjaman
--- ========================================================
-
-INSERT INTO `detail_peminjaman`
-(`id_detail`, `id_pinjam`, `id_buku`, `jumlah`)
-VALUES
-(6, 6, 8, 1);
-
-
--- ========================================================
--- TABLE: users
--- ========================================================
+--
+-- Table structure for table `users`
+--
 
 CREATE TABLE `users` (
   `id_user` int(11) NOT NULL,
@@ -146,90 +133,109 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Dumping data for table `users`
+--
 
--- ========================================================
--- DATA: users
--- ========================================================
-
-INSERT INTO `users`
-(`id_user`, `username`, `password`, `nama_lengkap`, `created_at`)
-VALUES
+INSERT INTO `users` (`id_user`, `username`, `password`, `nama_lengkap`, `created_at`) VALUES
 (1, 'admin', '0192023a7bbd73250516f069df18b500', 'Administrator', '2026-06-17 23:06:33');
 
+--
+-- Indexes for dumped tables
+--
 
--- ========================================================
--- PRIMARY KEY & INDEX
--- ========================================================
+--
+-- Indexes for table `buku`
+--
 
 ALTER TABLE `buku`
   ADD PRIMARY KEY (`id_buku`),
   ADD UNIQUE KEY `kode_buku` (`kode_buku`);
 
-
-ALTER TABLE `mahasiswa`
-  ADD PRIMARY KEY (`npm`);
-
-
-ALTER TABLE `peminjaman`
-  ADD PRIMARY KEY (`id_pinjam`),
-  ADD KEY `fk_peminjaman_mahasiswa` (`npm`);
-
+--
+-- Indexes for table `detail_peminjaman`
+--
 
 ALTER TABLE `detail_peminjaman`
   ADD PRIMARY KEY (`id_detail`),
   ADD KEY `fk_detail_pinjam` (`id_pinjam`),
   ADD KEY `fk_detail_buku` (`id_buku`);
 
+--
+-- Indexes for table `mahasiswa`
+--
+
+ALTER TABLE `mahasiswa`
+  ADD PRIMARY KEY (`npm`);
+
+--
+-- Indexes for table `peminjaman`
+--
+
+ALTER TABLE `peminjaman`
+  ADD PRIMARY KEY (`id_pinjam`),
+  ADD KEY `fk_peminjaman_mahasiswa` (`npm`);
+
+--
+-- Indexes for table `users`
+--
 
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id_user`),
   ADD UNIQUE KEY `username` (`username`);
 
+--
+-- AUTO_INCREMENT for dumped tables
+--
 
--- ========================================================
--- AUTO_INCREMENT
--- ========================================================
+--
+-- AUTO_INCREMENT for table `buku`
+--
 
 ALTER TABLE `buku`
   MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
+--
+-- AUTO_INCREMENT for table `detail_peminjaman`
+--
 
 ALTER TABLE `detail_peminjaman`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
+--
+-- AUTO_INCREMENT for table `peminjaman`
+--
 
 ALTER TABLE `peminjaman`
   MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
+--
+-- AUTO_INCREMENT for table `users`
+--
 
 ALTER TABLE `users`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
+--
+-- Constraints for dumped tables
+--
 
--- ========================================================
--- FOREIGN KEY
--- ========================================================
+--
+-- Constraints for table `detail_peminjaman`
+--
 
 ALTER TABLE `detail_peminjaman`
-  ADD CONSTRAINT `fk_detail_buku`
-    FOREIGN KEY (`id_buku`)
-    REFERENCES `buku` (`id_buku`)
-    ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_detail_buku` FOREIGN KEY (`id_buku`) REFERENCES `buku` (`id_buku`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_detail_pinjam` FOREIGN KEY (`id_pinjam`) REFERENCES `peminjaman` (`id_pinjam`) ON DELETE CASCADE;
 
-  ADD CONSTRAINT `fk_detail_pinjam`
-    FOREIGN KEY (`id_pinjam`)
-    REFERENCES `peminjaman` (`id_pinjam`)
-    ON DELETE CASCADE;
-
+--
+-- Constraints for table `peminjaman`
+--
 
 ALTER TABLE `peminjaman`
-  ADD CONSTRAINT `fk_peminjaman_mahasiswa`
-    FOREIGN KEY (`npm`)
-    REFERENCES `mahasiswa` (`npm`);
-
+  ADD CONSTRAINT `fk_peminjaman_mahasiswa` FOREIGN KEY (`npm`) REFERENCES `mahasiswa` (`npm`);
 
 COMMIT;
-
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
