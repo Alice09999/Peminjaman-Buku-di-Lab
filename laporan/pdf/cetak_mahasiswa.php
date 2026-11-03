@@ -42,7 +42,7 @@ $pdf->SetFont('Arial','',10);
 while($d = mysqli_fetch_assoc($data)){
 
     $pdf->Cell(15,10,$no++,1);
-    $pdf->Cell(50,10,$d['npm'],1);
+    $pdf->Cell(50,10,$d['nim'],1);
     $pdf->Cell(90,10,$d['nama'],1);
     $pdf->Cell(50,10,$d['kelas'],1);
     $pdf->Cell(70,10,$d['prodi'],1);

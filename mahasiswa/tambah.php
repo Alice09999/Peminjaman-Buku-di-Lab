@@ -20,10 +20,11 @@ VALUES
 
 (
 
-'$_POST[npm]',
+'$_POST[nim]',
 '$_POST[nama]',
 '$_POST[kelas]',
 '$_POST[prodi]',
+'$_POST[alamat]',
 NOW()
 
 )
@@ -77,13 +78,13 @@ header(
             <form method="POST">
 
                 <div class="sl-form-group">
-                    <label for="input-npm" class="sl-form-label">NPM</label>
+                    <label for="input-nim" class="sl-form-label">NIM</label>
                     <input
                         type="text"
-                        id="input-npm"
-                        name="npm"
+                        id="input-nim"
+                        name="nim"
                         class="sl-form-input"
-                        placeholder="Masukkan NPM"
+                        placeholder="Masukkan NIM"
                         required>
                 </div>
 
@@ -117,6 +118,17 @@ header(
                         name="prodi"
                         class="sl-form-input"
                         placeholder="Masukkan program studi"
+                        required>
+                </div>
+
+                <div class="sl-form-group">
+                    <label for="input-alamat" class="sl-form-label">Alamat</label>
+                    <input
+                        type="text"
+                        id="input-alamat"
+                        name="alamat"
+                        class="sl-form-input"
+                        placeholder="Masukkan alamat"
                         required>
                 </div>
 

@@ -73,10 +73,11 @@ INSERT INTO `detail_peminjaman` (`id_detail`, `id_pinjam`, `id_buku`, `jumlah`) 
 --
 
 CREATE TABLE `mahasiswa` (
-  `npm` varchar(15) NOT NULL,
+  `nim` varchar(15) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `kelas` varchar(20) DEFAULT NULL,
   `prodi` varchar(100) DEFAULT NULL,
+  `alamat` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -84,13 +85,13 @@ CREATE TABLE `mahasiswa` (
 -- Dumping data for table `mahasiswa`
 --
 
-INSERT INTO `mahasiswa` (`npm`, `nama`, `kelas`, `prodi`, `created_at`) VALUES
-('24781101', 'Alex', 'MI4D', 'Manajemen Informatika', '2026-06-18 06:45:46'),
-('24781102', 'Alya', 'MI4D', 'Manajemen Informatika', '2026-06-18 06:45:22'),
-('24781117', 'Silvia Nanda Agustin', 'MI4D', 'Manajemen Informatika', '2026-06-18 06:28:14'),
-('24781118', 'Yayuk', 'MI4D', 'Manajemen Informatika', '2026-06-18 06:44:58'),
-('24781119', 'Sehun', 'MI4D', 'Manajemen Informatika', '2026-06-18 06:46:07'),
-('24781120', 'LISA', 'MI4A', 'Manajemen Informatika', '2026-06-22 13:29:25');
+INSERT INTO `mahasiswa` (`nim`, `nama`, `kelas`, `prodi`, `alamat`, `created_at`) VALUES
+('24781101', 'Alex', 'MI4D', 'Manajemen Informatika', NULL, '2026-06-18 06:45:46'),
+('24781102', 'Alya', 'MI4D', 'Manajemen Informatika', NULL, '2026-06-18 06:45:22'),
+('24781117', 'Silvia Nanda Agustin', 'MI4D', 'Manajemen Informatika', NULL, '2026-06-18 06:28:14'),
+('24781118', 'Yayuk', 'MI4D', 'Manajemen Informatika', NULL, '2026-06-18 06:44:58'),
+('24781119', 'Sehun', 'MI4D', 'Manajemen Informatika', NULL, '2026-06-18 06:46:07'),
+('24781120', 'LISA', 'MI4A', 'Manajemen Informatika', NULL, '2026-06-22 13:29:25');
 
 -- --------------------------------------------------------
 
@@ -166,7 +167,7 @@ ALTER TABLE `detail_peminjaman`
 --
 
 ALTER TABLE `mahasiswa`
-  ADD PRIMARY KEY (`npm`);
+  ADD PRIMARY KEY (`nim`);
 
 --
 -- Indexes for table `peminjaman`
@@ -233,7 +234,7 @@ ALTER TABLE `detail_peminjaman`
 --
 
 ALTER TABLE `peminjaman`
-  ADD CONSTRAINT `fk_peminjaman_mahasiswa` FOREIGN KEY (`npm`) REFERENCES `mahasiswa` (`npm`);
+  ADD CONSTRAINT `fk_peminjaman_mahasiswa` FOREIGN KEY (`npm`) REFERENCES `mahasiswa` (`nim`);
 
 COMMIT;
 

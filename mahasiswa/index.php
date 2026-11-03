@@ -11,7 +11,7 @@ if(!isset($_SESSION['login'])){
 
 $data = mysqli_query(
     $koneksi,
-    "SELECT * FROM mahasiswa ORDER BY npm ASC"
+    "SELECT * FROM mahasiswa ORDER BY nim ASC"
 );
 
 ?>
@@ -58,10 +58,11 @@ $data = mysqli_query(
                 <table class="sl-table">
                     <thead>
                         <tr>
-                            <th>NPM</th>
+                            <th>NIM</th>
                             <th>Nama</th>
                             <th>Kelas</th>
                             <th>Prodi</th>
+                            <th>Alamat</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -72,14 +73,15 @@ $data = mysqli_query(
                     <?php while($row = mysqli_fetch_assoc($data)) : ?>
 
                         <tr>
-                            <td><code style="background: var(--bg-secondary); padding: 2px 8px; border-radius: 3px; font-size: 13px;"><?= $row['npm']; ?></code></td>
+                            <td><code style="background: var(--bg-secondary); padding: 2px 8px; border-radius: 3px; font-size: 13px;"><?= $row['nim']; ?></code></td>
                             <td style="font-weight: 500;"><?= $row['nama']; ?></td>
                             <td><?= $row['kelas']; ?></td>
                             <td style="color: var(--text-secondary);"><?= $row['prodi']; ?></td>
+                            <td style="color: var(--text-secondary);"><?= $row['alamat']; ?></td>
                             <td>
                                 <div class="sl-actions">
                                     <a
-                                        href="edit.php?npm=<?= $row['npm']; ?>"
+                                        href="edit.php?nim=<?= $row['nim']; ?>"
                                         class="sl-btn sl-btn-secondary sl-btn-sm"
                                         aria-label="Edit <?= $row['nama']; ?>">
                                         <span class="material-symbols-outlined" aria-hidden="true">edit</span>
@@ -87,7 +89,7 @@ $data = mysqli_query(
                                     </a>
 
                                     <a
-                                        href="hapus.php?npm=<?= $row['npm']; ?>"
+                                        href="hapus.php?nim=<?= $row['nim']; ?>"
                                         class="sl-btn sl-btn-destructive sl-btn-sm"
                                         onclick="return confirm('Yakin ingin menghapus data ini?')"
                                         aria-label="Hapus <?= $row['nama']; ?>">
@@ -102,7 +104,7 @@ $data = mysqli_query(
 
                     <?php else: ?>
                         <tr>
-                            <td colspan="5">
+                            <td colspan="6">
                                 <div class="sl-empty">
                                     <span class="material-symbols-outlined" aria-hidden="true">school</span>
                                     <div class="sl-empty-title">Belum ada data mahasiswa</div>

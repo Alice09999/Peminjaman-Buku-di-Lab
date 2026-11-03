@@ -2,14 +2,14 @@
 
 require '../config/koneksi.php';
 
-$npm=
-$_GET['npm'];
+$nim=
+$_GET['nim'];
 
 $data=
 mysqli_query(
 $koneksi,
 "SELECT * FROM mahasiswa
-WHERE npm='$npm'"
+WHERE nim='$nim'"
 );
 
 $row=
@@ -33,11 +33,12 @@ SET
 
 nama='$_POST[nama]',
 kelas='$_POST[kelas]',
-prodi='$_POST[prodi]'
+prodi='$_POST[prodi]',
+alamat='$_POST[alamat]'
 
 WHERE
 
-npm='$npm'
+nim='$nim'
 
 "
 
@@ -88,11 +89,11 @@ header(
             <form method="POST">
 
                 <div class="sl-form-group">
-                    <label for="edit-npm" class="sl-form-label">NPM</label>
+                    <label for="edit-nim" class="sl-form-label">NIM</label>
                     <input
                         type="text"
-                        id="edit-npm"
-                        value="<?= $row['npm'] ?>"
+                        id="edit-nim"
+                        value="<?= $row['nim'] ?>"
                         class="sl-form-input"
                         disabled
                         style="opacity: 0.6; cursor: not-allowed;">
@@ -127,6 +128,17 @@ header(
                         id="edit-prodi"
                         name="prodi"
                         value="<?= $row['prodi'] ?>"
+                        class="sl-form-input"
+                        required>
+                </div>
+
+                <div class="sl-form-group">
+                    <label for="edit-alamat" class="sl-form-label">Alamat</label>
+                    <input
+                        type="text"
+                        id="edit-alamat"
+                        name="alamat"
+                        value="<?= $row['alamat'] ?>"
                         class="sl-form-input"
                         required>
                 </div>

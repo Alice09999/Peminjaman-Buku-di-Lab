@@ -2,11 +2,11 @@
 
 require '../config/koneksi.php';
 
-$npm = $_GET['npm'];
+$nim = $_GET['nim'];
 
 $cek = mysqli_query(
     $koneksi,
-    "SELECT * FROM peminjaman WHERE npm='$npm' AND status='Dipinjam'"
+    "SELECT * FROM peminjaman WHERE npm='$nim' AND status='Dipinjam'"
 );
 
 if (mysqli_num_rows($cek) > 0) {
@@ -19,11 +19,11 @@ if (mysqli_num_rows($cek) > 0) {
 } else {
     mysqli_query(
         $koneksi,
-        "DELETE FROM peminjaman WHERE npm='$npm'"
+        "DELETE FROM peminjaman WHERE npm='$nim'"
     );
     mysqli_query(
         $koneksi,
-        "DELETE FROM mahasiswa WHERE npm='$npm'"
+        "DELETE FROM mahasiswa WHERE nim='$nim'"
     );
     echo "
     <script>

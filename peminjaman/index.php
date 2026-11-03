@@ -27,7 +27,7 @@ $query = mysqli_query(
 
     JOIN mahasiswa m
 
-    ON p.npm = m.npm
+    ON p.npm = m.nim
 
     ORDER BY p.id_pinjam DESC
 

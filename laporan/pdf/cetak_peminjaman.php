@@ -44,7 +44,7 @@ $query = mysqli_query(
         p.status
      FROM peminjaman p
      JOIN mahasiswa m
-     ON p.npm = m.npm"
+     ON p.npm = m.nim"
 
 );
 
