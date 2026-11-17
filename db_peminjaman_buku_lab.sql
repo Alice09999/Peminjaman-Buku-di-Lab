@@ -139,7 +139,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `username`, `password`, `nama_lengkap`, `created_at`) VALUES
-(1, 'admin', '0192023a7bbd73250516f069df18b500', 'Administrator', '2026-06-17 23:06:33');
+(1, 'admin', '5b956be031fc4dd5173ebde3ba701a2c', 'Administrator', '2026-06-17 23:06:33');
 
 --
 -- Indexes for dumped tables
